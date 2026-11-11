@@ -77,7 +77,10 @@ if (process.env.GH_STATS_TOKEN) {
     })
     const { data, errors } = await res.json()
     if (errors?.length || !data?.user) throw new Error(errors?.[0]?.message ?? 'no user in response')
-    stats.github = { ...stats.github, prsAuthored: data.user.authored.totalCount, prsMerged: data.user.merged.totalCount }
+    const authored = data.user.authored.totalCount
+    // An all-time count never drops; a lower number means the token can no longer see some repos (e.g. the org).
+    if (authored < (stats.github.prsAuthored ?? 0)) throw new Error(`token sees only ${authored} PRs, fewer than the saved ${stats.github.prsAuthored}; check its access`)
+    stats.github = { ...stats.github, prsAuthored: authored, prsMerged: data.user.merged.totalCount }
     console.log(`GitHub PRs: ${stats.github.prsAuthored} authored, ${stats.github.prsMerged} merged`)
   } catch (err) {
     console.warn(`GitHub PR fetch failed (${err.message}); keeping the saved numbers`)

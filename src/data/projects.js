@@ -171,7 +171,7 @@ export const contact = {
   linkedin: 'https://www.linkedin.com/in/ishan-keshari-410266398/',
   // TODO: create a free form at formspree.io and paste its URL (https://formspree.io/f/xxxx) to receive messages
   // directly. While empty, the Send a message form opens the visitor's email app instead.
-  formEndpoint: '',
+  formEndpoint: 'https://formspree.io/f/xqpqzlnr',
 }
 
 // Drafts: Ishan will edit these later.
