@@ -43,21 +43,21 @@ export default function About() {
     <section id="about" data-tone="rose" ref={scope} aria-labelledby="about-title" className="wrap py-24 lg:py-40">
       <SectionHead id="about-title" frame="FR.03 · About" meta={<Mark mark="will" />}>Behind the <em>lens.</em></SectionHead>
 
-      <div className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-12">
-        <div className="about-copy space-y-10 lg:col-span-7">
+      <div className="mt-12 space-y-12">
+        <div className="about-copy space-y-10">
           <p className="text-lg leading-relaxed text-silver/90">{bio.about}</p>
           <blockquote className="border-l-2 border-safelight-bright pl-6 font-display text-2xl leading-snug md:text-3xl">
             {bio.approach}
           </blockquote>
         </div>
 
-        <aside aria-labelledby="exposure-title" className="exposure glass rounded-3xl p-6 md:p-8 lg:col-span-5 lg:self-start">
+        <aside aria-labelledby="exposure-title" className="exposure glass rounded-3xl p-6 md:p-8">
           <div className="flex items-baseline justify-between gap-4">
             <h3 id="exposure-title" className="label text-silver">Exposure data</h3>
             <p className="label text-ash">Updated {gh.updatedAt}</p>
           </div>
 
-          <dl className="mt-6">
+          <dl className="mt-6 lg:grid lg:grid-cols-2 lg:gap-x-16">
             {board.map(([label, n]) => (
               <div key={label} className="flex items-center justify-between gap-4 border-b border-silver/10 py-4">
                 <dt className="label max-w-[7rem] text-ash sm:max-w-[9rem]">{label}</dt>

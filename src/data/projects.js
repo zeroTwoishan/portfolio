@@ -65,7 +65,7 @@ export const projects = [
     // Web sizes made by scripts/images.mjs; the animated original stays at /media/darkroom.webp.
     img: { base: '/media/darkroom-poster', widths: [800, 1120], w: 1120, h: 700 },
     preview: '/media/darkroom.webp', // animated demo, swapped in while the print is on screen (desktop)
-    alt: 'The Darkroom photo editor with an image open and editing controls beside it',
+    alt: "Darkroom landing page: 'Edit photos in your browser', with a box to upload a photo",
   },
 
   // XCEED Learning: team project. Only features confirmed from Ishan's own commits are listed.
@@ -99,7 +99,7 @@ export const projects = [
     year: 2026,
     status: 'In use at NIT Jalandhar',
     img: { base: '/media/xceed-learning', widths: [800, 1600], w: 1600, h: 1200 }, // demo data only
-    alt: 'XCEED Learning notebook submission screen, auto-checked against test cases',
+    alt: 'XCEED Learning lab notebook with coding questions and passed test cases',
   },
 
   // Talking points from the README:
@@ -121,7 +121,7 @@ export const projects = [
     year: 2026,
     status: 'Live',
     img: { base: '/media/cinescope', widths: [800, 1280], w: 1280, h: 800 },
-    alt: 'CineScope home screen showing movie, TV and anime cards',
+    alt: 'CineScope home screen with a search prompt and a row of trending movie posters',
   },
 
   // Talking points (from the CV):
