@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ishan Keshari — Full-Stack Developer · Beyond the frame.</title>
-    <meta name="description" content="Ishan Keshari, an engineering student at NIT Jalandhar who builds full-stack web apps and is now learning machine learning." />
+    <meta
+      name="description"
+      content="Ishan Keshari, an engineering student at NIT Jalandhar who builds full-stack web apps and is now learning machine learning."
+    />
     <meta property="og:site_name" content="Ishan Keshari" />
     <meta name="theme-color" content="#090909" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -12,11 +15,35 @@
     <!-- Motion hides content only under html.js, so no-JS visitors and crawlers see everything.
          Safety net: if the app hasn't started within 2.5 s, drop html.js so everything rests in its final state. -->
     <script>
-      document.documentElement.classList.add('js')
+      document.documentElement.classList.add("js");
       setTimeout(function () {
-        var h = document.documentElement.classList
-        if (!h.contains('motion-ready')) h.remove('js')
-      }, 2500)
+        var h = document.documentElement.classList;
+        if (!h.contains("motion-ready")) h.remove("js");
+      }, 2500);
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "@id": "https://ishan-keshari.vercel.app/#profile",
+        "url": "https://ishan-keshari.vercel.app/",
+        "name": "Ishan Keshari | NIT Jalandhar Student & Full-Stack Developer",
+        "mainEntity": {
+          "@type": "Person",
+          "@id": "https://ishan-keshari.vercel.app/#person",
+          "name": "Ishan Keshari",
+          "url": "https://ishan-keshari.vercel.app/",
+          "description": "Instrumentation and Control Engineering student at NIT Jalandhar and full-stack developer building web applications and developer tools.",
+          "affiliation": {
+            "@type": "CollegeOrUniversity",
+            "name": "Dr. B. R. Ambedkar National Institute of Technology Jalandhar"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/ishan-keshari-410266398/",
+            "https://github.com/zeroTwoishan"
+          ]
+        }
+      }
     </script>
   </head>
   <body>
