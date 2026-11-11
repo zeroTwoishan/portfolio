@@ -1,0 +1,23 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "instrument serif",
+        "createdAt": "2026-11-10T18:15:53.047Z",
+        "reason": "Ishan's approved brief specifies Instrument Serif for editorial display headings (plan v2.2 accepted 2026-11-07)"
+      },
+      {
+        "rule": "italic-serif-display",
+        "value": "*",
+        "files": [
+          "scripts/og.html"
+        ],
+        "createdAt": "2026-11-10T18:15:53.371Z",
+        "reason": "Share image mirrors the approved hero, whose italic second line is part of plan v2.2 that Ishan accepted"
+      }
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+# Refreshes LeetCode and GitHub stats once a day and commits stats.json if it changed.
+# The push makes Vercel rebuild the site, and the commits keep GitHub from pausing this schedule
+# (it pauses scheduled workflows after 60 days without commits).
+name: Refresh stats daily
+on:
+  schedule:
+    - cron: '30 0 * * *' # 06:00 IST
+  workflow_dispatch: # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/fetch-stats.mjs
+        env:
+          GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }} # read-only token for PR counts; optional
+      - name: Commit if the numbers changed
+        run: |
+          git diff --quiet src/data/stats.json && { echo "No change"; exit 0; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Refresh stats"
+          git push

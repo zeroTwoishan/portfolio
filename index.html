@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ishan Keshari — Full-Stack Developer · Beyond the frame.</title>
+    <meta name="description" content="Ishan Keshari, an engineering student at NIT Jalandhar who builds full-stack web apps and is now learning machine learning." />
+    <meta property="og:site_name" content="Ishan Keshari" />
+    <meta name="theme-color" content="#090909" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Motion hides content only under html.js, so no-JS visitors and crawlers see everything.
+         Safety net: if the app hasn't started within 2.5 s, drop html.js so everything rests in its final state. -->
+    <script>
+      document.documentElement.classList.add('js')
+      setTimeout(function () {
+        var h = document.documentElement.classList
+        if (!h.contains('motion-ready')) h.remove('js')
+      }, 2500)
+    </script>
+  </head>
+  <body>
+    <div id="root"><!--app--></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
