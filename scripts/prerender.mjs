@@ -25,7 +25,7 @@ page = page.replace('</title>', `</title>\n    ${fonts.join('\n    ')}`)
 const { bio, contact } = await import('../src/data/projects.js')
 const site = bio.siteUrl.includes('TODO') ? null : bio.siteUrl.replace(/\/$/, '')
 const title = page.match(/<title>([^<]*)<\/title>/)[1]
-const description = page.match(/<meta name="description" content="([^"]*)"/)[1]
+const description = page.match(/<meta\s+name="description"\s+content="([^"]*)"/)[1]
 const person = {
   '@context': 'https://schema.org',
   '@type': 'Person',
