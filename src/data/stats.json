@@ -1,19 +1,19 @@
 {
   "leetcode": {
     "username": "ishan_zerotwo",
-    "solved": 343,
+    "solved": 344,
     "easy": 162,
-    "medium": 169,
+    "medium": 170,
     "hard": 12,
-    "ranking": 429951,
-    "updatedAt": "2026-11-11"
+    "ranking": 426213,
+    "updatedAt": "2026-11-12"
   },
   "github": {
     "username": "zeroTwoishan",
     "publicRepos": 14,
-    "contributionsLastYear": 373,
-    "updatedAt": "2026-11-11",
+    "contributionsLastYear": 390,
+    "updatedAt": "2026-11-12",
     "prsAuthored": 85,
-    "prsMerged": 79
+    "prsMerged": 80
   }
 }
