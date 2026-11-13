@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { gsap, useGSAP, DESKTOP_MOTION } from './motion/gsap.js'
+import { gsap, useGSAP, MOTION } from './motion/gsap.js'
 import Nav from './components/Nav.jsx'
 import Backdrop from './components/Backdrop.jsx'
 import Cursor from './components/Cursor.jsx'
@@ -15,9 +15,9 @@ import { bio } from './data/projects.js'
 export default function App() {
   const spine = useRef(null)
 
-  // R1: the red line draws down the gutter as you read (desktop; it is fully drawn without JS).
+  // R1: the red line draws down the gutter as you read (it is fully drawn without JS).
   useGSAP(() => {
-    gsap.matchMedia().add(DESKTOP_MOTION, () => {
+    gsap.matchMedia().add(MOTION, () => {
       gsap.fromTo('.red-line', { scaleY: 0 }, {
         scaleY: 1, ease: 'none', transformOrigin: 'top',
         scrollTrigger: { trigger: spine.current, start: 'top 60%', end: 'bottom bottom', scrub: true },
@@ -43,9 +43,9 @@ export default function App() {
       <SocialRail />
       <main id="main">
         <Hero />
-        {/* One continuous red line in the left gutter, from About to Contact (desktop). */}
+        {/* One continuous red line in the left gutter, from Work to Contact. */}
         <div ref={spine} className="relative">
-          <span aria-hidden="true" className="red-line absolute inset-y-0 left-[calc(max((100%-1384px)/2,0px)+36px)] hidden w-px bg-safelight lg:block" />
+          <span aria-hidden="true" className="red-line absolute inset-y-0 left-2 w-px bg-safelight md:left-5 lg:left-[calc(max((100%-1384px)/2,0px)+36px)]" />
           {/* Karan's order, with About (the numbers) before the story. */}
           <Work />
           <About />

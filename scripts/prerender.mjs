@@ -6,13 +6,13 @@ const { render } = await import('../dist-ssr/entry-server.js')
 let page = await readFile('dist/index.html', 'utf8')
 if (!page.includes('<!--app-->')) throw new Error('dist/index.html is missing the <!--app--> placeholder')
 
-// Preload the three fonts the first screen needs (headline upright + italic, body). Their names are hashed by Vite,
+// Preload the three fonts the first screen needs (poster headline, its serif italic accent, body). Their names are hashed by Vite,
 // so look them up; late font swaps otherwise relayout the whole page on slow phones.
 const assets = await readdir('dist/assets')
 const fonts = [
-  /^instrument-serif-latin-400-normal-.*\.woff2$/,
   /^instrument-serif-latin-400-italic-.*\.woff2$/,
-  /^inter-latin-wght-normal-.*\.woff2$/,
+  /^big-shoulders-display-latin-wght-normal-.*\.woff2$/,
+  /^hanken-grotesk-latin-wght-normal-.*\.woff2$/,
 ].map((re) => {
   const file = assets.find((f) => re.test(f))
   if (!file) throw new Error(`font for ${re} not found in dist/assets`)

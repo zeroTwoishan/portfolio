@@ -31,6 +31,8 @@ export default function Hero() {
         type: 'lines', mask: 'lines', autoSplit: true,
         onSplit: (self) => gsap.from(self.lines, { yPercent: 110, duration: 0.9, delay: 0.15, stagger: 0.08, ease: 'expo.out' }),
       })
+      // The photo drifts and pushes in slightly as the hero scrolls away.
+      gsap.to('.hero-photo', { yPercent: 10, scale: 1.08, ease: 'none', scrollTrigger: { trigger: scope.current, start: 'top top', end: 'bottom top', scrub: true } })
     })
   }, { scope })
 
@@ -44,7 +46,7 @@ export default function Hero() {
     >
       <div className="relative z-10 -mt-[30vw] md:-mt-[16vw] lg:col-span-7 lg:mt-0">
         <p className="hero-meta reveal label text-ash">Ishan Keshari · Portfolio / 2026</p>
-        <h1 id="hero-title" className="hero-title reveal mt-6 font-display text-[clamp(3.25rem,9vw,8.5rem)] leading-[0.95]">
+        <h1 id="hero-title" className="hero-title reveal mt-6 poster text-[clamp(3.25rem,9vw,8.5rem)] leading-[0.95]">
           I build things.<br />
           <em>And make them work.</em>
         </h1>
@@ -67,7 +69,7 @@ export default function Hero() {
               height="1448"
               fetchPriority="high"
               alt={`Portrait of ${bio.name}, lit in red against a dark background`}
-              className="size-full object-cover object-top lg:object-[50%_30%]"
+              className="hero-photo size-full object-cover object-top lg:object-[50%_30%]"
             />
           </picture>
         </div>

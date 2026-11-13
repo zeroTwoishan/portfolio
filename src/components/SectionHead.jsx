@@ -24,7 +24,7 @@ export default function SectionHead({ id, frame, children, meta }) {
         {meta}
       </div>
       <div className="relative mt-4 inline-block">
-        <h2 id={id} className="font-display text-5xl leading-none md:text-7xl">{children}</h2>
+        <h2 id={id} className="poster text-5xl leading-none md:text-7xl">{children}</h2>
         <span aria-hidden="true" className="wipe absolute inset-0 origin-left scale-x-0 bg-safelight" />
       </div>
     </div>

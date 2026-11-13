@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { MagneticA } from '../components/Magnetic.jsx'
-import { gsap, SplitText, useGSAP, reveal, DESKTOP_MOTION } from '../motion/gsap.js'
+import { gsap, SplitText, useGSAP, reveal, MOTION } from '../motion/gsap.js'
 import { bio, contact } from '../data/projects.js'
 import { MARKS, useExposures } from '../motion/exposures.js'
 import ContactForm from '../components/ContactForm.jsx'
@@ -31,16 +31,14 @@ export default function Contact() {
   useGSAP((ctx, contextSafe) => {
     // Split only when the heading arrives: fonts have loaded by then, so the breaks match the real text.
     // (Creating triggers inside an autoSplit callback can run mid-refresh and crash ScrollTrigger.)
-    const title = (type, stagger) => () =>
-      reveal(scope.current.querySelector('.contact-title'), contextSafe(() => {
-        const split = SplitText.create('.contact-title', { type })
-        gsap.from(split[type], { opacity: 0, y: 24, duration: 1, stagger, ease: 'expo.out', onComplete: () => split.revert() })
-      }))
     const mm = gsap.matchMedia()
-    mm.add(DESKTOP_MOTION, title('chars', 0.015))
-    mm.add('(max-width: 1023px) and (prefers-reduced-motion: no-preference)', title('words', 0.05))
+    mm.add(MOTION, () =>
+      reveal(scope.current.querySelector('.contact-title'), contextSafe(() => {
+        const split = SplitText.create('.contact-title', { type: 'words,chars' }) // words keep letters from wrapping mid-word
+        gsap.from(split.chars, { opacity: 0, y: 24, duration: 1, stagger: 0.015, ease: 'expo.out', onComplete: () => split.revert() })
+      })))
     // C2: the final safelight brightens as the last frame arrives.
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
+    mm.add(MOTION, () => {
       gsap.fromTo('.contact-glow', { opacity: 0.2, scale: 1.2 }, {
         opacity: 1, scale: 1, ease: 'none',
         scrollTrigger: { trigger: scope.current, start: 'top bottom', end: 'center center', scrub: true },
@@ -63,7 +61,7 @@ export default function Contact() {
       <div aria-hidden="true" className="contact-glow absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_30%_40%,rgb(146_45_48/0.22),transparent)]" />
       <div className="wrap">
         <p className="label text-ash">FR.06 · Contact</p>
-        <h2 id="contact-title" className="contact-title mt-4 max-w-5xl font-display text-[clamp(3rem,8vw,7.5rem)] leading-[0.95]">
+        <h2 id="contact-title" className="contact-title mt-4 max-w-5xl poster text-[clamp(3rem,8vw,7.5rem)] leading-[0.95]">
           Every story needs a final <em>frame.</em>
         </h2>
 

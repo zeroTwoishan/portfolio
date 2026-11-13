@@ -25,14 +25,16 @@ export default function Work() {
     })
 
     const mm = gsap.matchMedia()
-    // W3 (desktop): each print develops as it travels to the middle of the screen.
-    mm.add(DESKTOP_MOTION, () => {
+    // W3: each print develops as it travels to the middle of the screen.
+    mm.add(MOTION, () => {
       gsap.utils.toArray('.print-img', scope.current).forEach((frame) => {
         gsap.fromTo(frame.querySelector('.develop'), { opacity: 0.7 }, {
           opacity: 0, ease: 'none',
           scrollTrigger: { trigger: frame, start: 'top bottom', end: 'center center', scrub: true },
         })
       })
+    })
+    mm.add(DESKTOP_MOTION, () => {
       // W5: projects with an animated preview play it only while on screen.
       const resets = gsap.utils.toArray('.print-img[data-preview]', scope.current).map((frame) => {
         const img = frame.querySelector('img')
@@ -47,14 +49,6 @@ export default function Work() {
         return () => show(false)
       })
       return () => resets.forEach((reset) => reset())
-    })
-    // W3 (mobile): a one-shot develop on enter.
-    mm.add('(max-width: 1023px) and (prefers-reduced-motion: no-preference)', () => {
-      const stops = gsap.utils.toArray('.develop', scope.current).map((layer) => {
-        const tween = gsap.fromTo(layer, { opacity: 0.7 }, { opacity: 0, duration: 1, paused: true })
-        return reveal(layer, () => tween.play())
-      })
-      return () => stops.forEach((stop) => stop())
     })
   }, { scope, idle: true })
 

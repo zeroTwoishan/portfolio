@@ -40,7 +40,7 @@ export default function Arsenal() {
                     style={color ? { '--brand': color } : undefined}
                     className="tile glass group relative flex aspect-square flex-col items-center justify-center gap-3 rounded-2xl p-3 text-center transition-[translate,border-color] duration-300 hover:-translate-y-1 hover:border-silver/35 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                   >
-                    <TechIcon name={s} className="size-8 text-silver/85 transition-colors duration-300 group-hover:text-[var(--brand,var(--color-silver))]" />
+                    <TechIcon name={s} className="size-8 text-[var(--brand,var(--color-silver))]" />
                     <span className="text-xs leading-tight text-silver/90">{s}</span>
                     {tag && <span className="label absolute top-2 right-2.5 text-[0.55rem] text-ash">{tag}</span>}
                   </li>

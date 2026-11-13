@@ -57,7 +57,7 @@ const Arrow = () => <span aria-hidden="true" className="inline-block transition-
 export default function Footer() {
   return (
     <footer data-tone="signal" className="wrap pt-20 pb-12">
-      <p className="font-display text-[clamp(3.25rem,11vw,9.5rem)] leading-none">{bio.name}</p>
+      <p className="poster text-[clamp(3.25rem,11vw,9.5rem)] leading-none">{bio.name}</p>
       <div className="mt-14 grid gap-12 border-t border-silver/10 pt-10 md:grid-cols-3">
         <dl className="space-y-6">
           <div>

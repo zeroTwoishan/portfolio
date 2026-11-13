@@ -20,3 +20,21 @@ export function logStatus(when, buildDate) {
   const built = new Date(buildDate)
   return year === built.getUTCFullYear() && month === built.getUTCMonth() ? 'Ongoing' : 'Complete'
 }
+
+const DAY = 86_400_000
+
+// LeetCode's submission calendar ({ unixSeconds: submissions }) as one 0–4 level per UTC day from `start`
+// to `end` (both "YYYY-MM-DD", inclusive): the same shape GitHub's contribution levels are saved in.
+export function calendarLevels(counts, start, end) {
+  const perDay = {}
+  for (const [ts, n] of Object.entries(counts)) {
+    const day = Math.floor((ts * 1000) / DAY)
+    perDay[day] = (perDay[day] ?? 0) + n
+  }
+  let levels = ''
+  for (let d = Date.parse(start) / DAY; d <= Date.parse(end) / DAY; d++) {
+    const n = perDay[d] ?? 0
+    levels += n >= 7 ? 4 : n >= 4 ? 3 : n >= 2 ? 2 : n >= 1 ? 1 : 0
+  }
+  return levels
+}

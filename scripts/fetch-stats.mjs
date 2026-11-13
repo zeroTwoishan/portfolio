@@ -1,11 +1,14 @@
 // Refreshes LeetCode and GitHub stats before each build. Each source that fails keeps its saved numbers,
 // so the build never breaks.
 import { readFile, writeFile } from 'node:fs/promises'
+import { calendarLevels } from '../src/data/derive.js'
 
 const FILE = 'src/data/stats.json'
 const LEETCODE_USER = 'ishan_zerotwo'
 const GITHUB_USER = 'zeroTwoishan'
 const today = new Date().toISOString().slice(0, 10)
+// Heatmaps cover the same window GitHub shows: from the Sunday 52 weeks back, to today.
+const heatStart = new Date(Date.parse(today) - (364 + new Date(today).getUTCDay()) * 86_400_000).toISOString().slice(0, 10)
 const stats = JSON.parse(await readFile(FILE, 'utf8'))
 
 async function get(url, init) {
@@ -19,6 +22,7 @@ try {
     matchedUser(username: $username) {
       submitStatsGlobal { acSubmissionNum { difficulty count } }
       profile { ranking }
+      userCalendar { submissionCalendar }
     }
   }`
   const res = await get('https://leetcode.com/graphql', {
@@ -34,6 +38,7 @@ try {
     username: LEETCODE_USER,
     solved: count.all, easy: count.easy, medium: count.medium, hard: count.hard,
     ranking: data.matchedUser.profile.ranking,
+    heat: { start: heatStart, levels: calendarLevels(JSON.parse(data.matchedUser.userCalendar.submissionCalendar), heatStart, today) },
     updatedAt: today,
   }
   console.log(`LeetCode: ${stats.leetcode.solved} solved`)
@@ -48,11 +53,15 @@ try {
   const html = (await (await get(`https://github.com/users/${GITHUB_USER}/contributions`)).text()).replace(/\s+/g, ' ')
   const match = html.match(/([\d,]+) contributions? in the last year/)
   if (!match) throw new Error('contributions count not found in the page')
+  // One cell per day in the same HTML: its date and a 0–4 level.
+  const days = [...html.matchAll(/data-date="(\d{4}-\d\d-\d\d)"[^>]*data-level="(\d)"/g)].map((m) => [m[1], m[2]]).sort()
+  if (days.length < 300) throw new Error('contribution days not found in the page')
   stats.github = {
     ...stats.github, // keeps the PR counts below, which have their own source
     username: GITHUB_USER,
     publicRepos: user.public_repos,
     contributionsLastYear: Number(match[1].replace(/,/g, '')),
+    heat: { start: days[0][0], levels: days.map((d) => d[1]).join('') },
     updatedAt: today,
   }
   console.log(`GitHub: ${stats.github.publicRepos} repos, ${stats.github.contributionsLastYear} contributions`)

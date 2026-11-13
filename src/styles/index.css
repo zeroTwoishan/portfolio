@@ -13,7 +13,8 @@
   --color-rose: #b98a8e; /* the INTENSITY mark only */
 
   --font-display: "Instrument Serif", ui-serif, Georgia, serif;
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-poster: "Big Shoulders Display Variable", Impact, sans-serif;
+  --font-sans: "Hanken Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Martian Mono Variable", ui-monospace, monospace;
 }
 
@@ -34,6 +35,18 @@
       linear-gradient(rgb(234 229 220 / 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgb(234 229 220 / 0.03) 1px, transparent 1px);
     background-size: 64px 64px;
+  }
+}
+
+/* Poster headline: heavy condensed caps. The emphasised word (<em>) stays in the serif italic. */
+@utility poster {
+  font-family: var(--font-poster);
+  font-weight: 800;
+  text-transform: uppercase;
+  & em {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: none;
   }
 }
 
@@ -95,6 +108,8 @@
 }
 
 /* Custom cursor (mouse + motion-OK only; Cursor.jsx adds the class). Text fields keep the text cursor. */
+header.glass { background-color: rgb(9 9 9 / 0.72); } /* readable even where the blur does not render (iOS) */
+
 html.custom-cursor, html.custom-cursor * { cursor: none; }
 html.custom-cursor :is(input, textarea) { cursor: text; }
 .cursor-ring {

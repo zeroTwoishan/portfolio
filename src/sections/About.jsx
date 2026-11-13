@@ -23,6 +23,31 @@ const board = [
   ['Public repos', gh.publicRepos],
 ]
 
+// A year of activity, one square per day, a column per week (the GitHub layout). Levels 0–4 set the opacity.
+const SHADE = ['bg-silver/[0.07]', 'opacity-35', 'opacity-55', 'opacity-80', '']
+function Heatmap({ title, summary, heat, color }) {
+  return (
+    <figure className="min-w-0">
+      <figcaption className="flex items-baseline justify-between gap-4 text-sm">
+        <span className="label text-silver">{title}</span>
+        <span className="text-ash">{summary}</span>
+      </figcaption>
+      {/* Phones: fixed-size squares, clipped to the most recent months. Desktop: the whole year, fluid. */}
+      <div aria-hidden="true" className="mt-3 flex justify-end overflow-hidden">
+        <div className="heat grid shrink-0 auto-cols-[9px] grid-flow-col grid-rows-7 gap-[3px] lg:w-full lg:auto-cols-fr">
+          {heat.levels.split('').map((level, i) => (
+            <span
+              key={i}
+              style={i === 0 ? { gridRowStart: new Date(heat.start).getUTCDay() + 1 } : undefined}
+              className={`aspect-square rounded-[2px] ${level === '0' ? SHADE[0] : `${color} ${SHADE[level]}`}`}
+            />
+          ))}
+        </div>
+      </div>
+    </figure>
+  )
+}
+
 export default function About() {
   const scope = useRef(null)
 
@@ -34,6 +59,7 @@ export default function About() {
       const panel = gsap.timeline({ paused: true })
         .from('.odo-strip', { y: 0, duration: 1.4, stagger: 0.06, ease: 'power3.out', clearProps: 'transform' }) // roll up from 0, then hand back to CSS
         .from('.split-bar > span', { scaleX: 0, transformOrigin: 'left', duration: 0.9, stagger: 0.12, ease: 'power3.out' }, 0.1)
+        .from('.heat > span', { scale: 0, duration: 0.4, ease: 'power2.out', stagger: { amount: 1, grid: 'auto', from: 'start' } }, 0.2)
       const stops = [reveal($('.about-copy'), () => copy.play()), reveal($('.exposure'), () => panel.play())]
       return () => stops.forEach((stop) => stop())
     })
@@ -86,6 +112,13 @@ export default function About() {
               ))}
             </dl>
           </div>
+
+          {gh.heat && lc.heat && (
+            <div className="mt-8 grid gap-8 border-t border-silver/10 pt-6 lg:grid-cols-2 lg:gap-x-16">
+              <Heatmap title="GitHub" summary="daily contributions" heat={gh.heat} color="bg-safelight-bright" />
+              <Heatmap title="LeetCode" summary="daily submissions" heat={lc.heat} color="bg-[#ffa116]" />
+            </div>
+          )}
 
           <p className="mt-8 border-t border-silver/10 pt-6 text-sm text-silver/90">
             B.Tech Instrumentation and Control

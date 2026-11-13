@@ -1,6 +1,7 @@
 import '@fontsource/instrument-serif/400.css'
 import '@fontsource/instrument-serif/400-italic.css'
-import '@fontsource-variable/inter/wght.css'
+import '@fontsource-variable/big-shoulders-display'
+import '@fontsource-variable/hanken-grotesk/wght.css'
 import '@fontsource-variable/martian-mono/wght.css'
 import './styles/index.css'
 import { createRoot, hydrateRoot } from 'react-dom/client'

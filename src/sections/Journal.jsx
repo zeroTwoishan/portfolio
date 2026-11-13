@@ -101,7 +101,7 @@ export default function Journal() {
           <div className="flex h-full flex-col justify-between py-10 pr-10 pl-16">
             <p className="label text-ash">Rewind the reel</p>
             <div>
-              <p key={entries[active].year} className="big-date font-display text-[8.5rem] leading-none xl:text-[10rem]">{entries[active].year}</p>
+              <p key={entries[active].year} className="big-date poster text-[8.5rem] leading-none xl:text-[10rem]">{entries[active].year}</p>
               <p className="label mt-4 text-silver">{entries[active].when}{entries[active].status && ` · ${entries[active].status}`}</p>
             </div>
             <div>

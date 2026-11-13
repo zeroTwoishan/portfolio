@@ -22,7 +22,7 @@ const DRAWN = {
   Email: 'M3 6h18v12H3zM3 6l9 7 9-7',
 }
 
-// Brand colour on hover, unless it is too dark to see on the page (e.g. Vercel, GitHub, Express are black).
+// Brand colour, unless it is too dark to see on the page (e.g. Vercel, GitHub, Express are black).
 const visible = (hex) => {
   const [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
   return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.25

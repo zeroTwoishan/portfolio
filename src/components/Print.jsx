@@ -58,7 +58,7 @@ export default function Print({ project, frame, flip = false }) {
           <span aria-hidden="true" className="h-px w-8 bg-silver/20" />
           <span><span aria-hidden="true" className="mr-2 inline-block size-1.5 rounded-full bg-safelight-bright align-middle" />{project.status}</span>
         </p>
-        <h3 id={`${project.slug}-title`} className="mt-4 font-display text-5xl leading-none md:text-6xl">{project.title}</h3>
+        <h3 id={`${project.slug}-title`} className="mt-4 poster text-5xl leading-none md:text-6xl">{project.title}</h3>
         <p className="mt-5 text-silver/90">{project.summary}</p>
 
         <ul aria-label="Built with" className="mt-6 flex flex-wrap gap-2">
